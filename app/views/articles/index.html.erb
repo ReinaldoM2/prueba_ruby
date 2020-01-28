@@ -1,0 +1,23 @@
+<style type="text/css">
+	#divpadre{
+		border-style: solid;
+		overflow: hidden;
+	}
+
+	/*#divhijo{
+		float: left;
+	}
+</style>
+<%@articles.each do |article| %>
+<div class="container" id="divpadre">
+	<div id="divhijo">
+		<h1>
+		<%= article.tittle%>
+		</h1>
+		<%= article.body%>
+		<br>
+		Cantidad de visitas <%= article.visit_count%>
+	</div>
+</div>
+<br>
+<%end%>

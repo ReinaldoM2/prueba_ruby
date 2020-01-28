@@ -1,0 +1,64 @@
+<style type="text/css">
+	#div_titulo{
+		width: 20%;
+		position: relative;
+		top: 68px;
+
+	}
+	#div_cuerpo{
+		position: relative;
+		width: 21%;
+		left: 25%;
+	}
+	#div_numero{
+		position: relative;
+		width: 32%;
+		left: 49%;
+		bottom: 69px;
+	}
+
+	.button, input{
+		width: 95%;
+	}
+
+	#div_boton{
+		width: 10%;
+		position: relative;
+		left: 82%;
+		bottom: 105px;
+	}
+</style>
+<div class="container">
+
+	<div>
+		<%= @articles.errors.inspect %>
+		<% if @articles.errors.any? %>
+		<div>
+			<h1>hay errores</h1>
+		</div>
+	 <% end %>
+	 <h1>after</h1>
+	</div>
+
+<%=form_with model: @articles do |f| %>
+	<div class="field" id="div_titulo">
+		<%=label(f, "Titulo")%>
+		<br>
+		<%=f.text_field :tittle, placeholder:"Escribe el titulo aqui"%>
+	</div>
+	<div class="field" id="div_cuerpo">
+		<%=f.label "Cuerpo" %>
+		<br>
+		<%=f.text_field :body, placeholder:"Escribe lo que desees aqui"%>
+	</div>
+	<div class="field" id="div_numero">
+		<%=f.label "Numero de visitas" %>
+		<br>
+		<%=f.number_field :visit_count, placeholder:"Escribe la cantidad de visitias que quieres", min:"0"%>
+	</div>
+	<div class="field" id="div_boton">
+		<%=f.submit value:"Guardar" %>
+	</div>
+</div>
+
+<%end%>
