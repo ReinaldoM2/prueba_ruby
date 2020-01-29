@@ -1,63 +1,69 @@
 <style type="text/css">
-	#div_titulo{
-		width: 20%;
-		position: relative;
-		top: 68px;
 
-	}
-	#div_cuerpo{
-		position: relative;
-		width: 21%;
-		left: 25%;
-	}
-	#div_numero{
-		position: relative;
-		width: 32%;
-		left: 49%;
-		bottom: 69px;
+	.error {
+		background-color: #ff000091;
+		padding: 1em;
+		text-align: center;
+		color: #fff;
+		border-radius: 5px;
+		box-shadow: 5px 4px 15px #d8d8d8;
+		display: block;
 	}
 
-	.button, input{
-		width: 95%;
-	}
-
-	#div_boton{
-		width: 10%;
-		position: relative;
-		left: 82%;
-		bottom: 105px;
+	input[type=submit] {
+	  width: 100%;
+	  background-color:#2364FE;
+	  color: white;
+	  padding: 14px 20px;
+	  margin: 8px 0;
+	  border: none;
+	  border-radius: 4px;
 	}
 </style>
+
 <div class="container">
-
-	<div>
-		<%= @articles.errors.inspect %>
-		<% if @articles.errors.any? %>
 		<div>
-			<h1>hay errores</h1>
+			<% if @articles.errors.any? %>
+			<script type="text/javascript">
+				function hideError (e) {
+					document.getElementById('error').style.display = "none"
+				}
+			</script>
+			<p  id="error"class="error" onclick="hideError();">Error de Guardado</p>
+		 <% end %>
 		</div>
-	 <% end %>
-	 <h1>after</h1>
-	</div>
 
-<%=form_with model: @articles do |f| %>
-	<div class="field" id="div_titulo">
-		<%=label(f, "Titulo")%>
-		<br>
-		<%=f.text_field :tittle, placeholder:"Escribe el titulo aqui"%>
+	<%=form_with model: @articles do |f| %>
+	<div class="form-group">
+				<%=label(f, "Nombre del Producto", {:class => "col-md-4 control-label"})%>
+				 <div class="col-md-6">
+					 <%= f.text_field :name, {:class => "form-control", required: true} %>
+				 </div>
 	</div>
-	<div class="field" id="div_cuerpo">
-		<%=f.label "Cuerpo" %>
-		<br>
-		<%=f.text_field :body, placeholder:"Escribe lo que desees aqui"%>
+	<div class="form-group">
+				<%=label(f, "Marca del Producto", :class => "col-md-4 control-label")%>
+				 <div class="col-md-6">
+					 <%= f.select(:brand , raw('<option value="Maxell">Maxell</option>
+					 														<option value="Esenses">Esenses</option>
+																			<option value="Genius">Genius</option>'), {required: true}, {:class => "form-control"} ) %>
+				 </div>
 	</div>
-	<div class="field" id="div_numero">
-		<%=f.label "Numero de visitas" %>
-		<br>
-		<%=f.number_field :visit_count, placeholder:"Escribe la cantidad de visitias que quieres", min:"0"%>
+	<div class="form-group">
+				<%=label(f, "Precio del Producto", {:class => "col-md-4 control-label"})%>
+				 <div class="col-md-6">
+					 <%= f.number_field :price, {:class => "form-control" , min: "0", required: true} %>
+				 </div>
 	</div>
-	<div class="field" id="div_boton">
-		<%=f.submit value:"Guardar" %>
+	<div class="form-group">
+				<%=label(f, "Cantidad del Producto", {:class => "col-md-4 control-label"})%>
+				 <div class="col-md-6">
+					 <%= f.number_field :quantity, {:class => "form-control" , min: "0", required: true} %>
+				 </div>
+	</div>
+	<div class="form-group">
+				 <div class="col-md-6">
+					 <%= f.submit value:"Guardar" %>
+				 </div>
 	</div>
 </div>
 

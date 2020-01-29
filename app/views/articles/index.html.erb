@@ -1,23 +1,27 @@
 <style type="text/css">
-	#divpadre{
-		border-style: solid;
-		overflow: hidden;
-	}
-
-	/*#divhijo{
-		float: left;
+	#crear_boton{
+		margin-bottom: 20px;
 	}
 </style>
-<%@articles.each do |article| %>
-<div class="container" id="divpadre">
-	<div id="divhijo">
-		<h1>
-		<%= article.tittle%>
-		</h1>
-		<%= article.body%>
+<div class="container" id="crear_boton">
+	<%= link_to "Crear", new_article_path, class:"btn btn-outline-primary btn-lg"%>
+</div>
+<div class="container">
+	<div class="row">
+		<%@articles.each do |article| %>
+		  <div class="col-sm-4">
+		    <div class="card">
+		      <div class="card-body">
+		        <h5 class="card-title"><%= link_to article.name, new_article_path%></h5>
+		        <p class="card-text"><%= article.brand%></p>
+							<p>	Precio $<%= article.price%></p>
+							<p> Unidades <%= article.quantity%></p>
+		        <a href="#" class="btn btn-outline-primary">Editar</a>
+						<a href="#" class="btn btn-outline-danger">Eliminar</a>
+		      </div>
+		    </div>
+		  </div>
 		<br>
-		Cantidad de visitas <%= article.visit_count%>
+		<%end%>
 	</div>
 </div>
-<br>
-<%end%>

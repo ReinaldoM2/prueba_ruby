@@ -18,21 +18,22 @@ class ArticlesController < ApplicationController
 	#post /articles
 	def create
 
-		@articles = Article.new(tittle: params[:article][:tittle],
-								body: params[:article][:body],
-								visit_count: params[:article][:visit_count])
+		@articles = Article.new(name: params[:article][:name],
+								brand: params[:article][:brand],
+								price: params[:article][:price],
+								quantity: params[:article][:quantity])
 
 		if @articles.valid?
 			@articles.save
-			redirect_to article_path
-		else 
-			@articles.errors
+			redirect_to @articles, :flash => { :success => "Message" }
+		else
+			render :new
 		end
 
 	end
 
 	#put /articles:id
 	def update
-		
+
 	end
 end
