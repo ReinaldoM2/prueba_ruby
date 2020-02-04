@@ -32,8 +32,27 @@ class ArticlesController < ApplicationController
 
 	end
 
+	#PUT /articles/:
+	def edit
+		@articles = Article.find(params[:id])
+	end
+
 	#put /articles:id
 	def update
-
+		# #update
+		@articles = Article.find(params[:id])
+		if @articles.update(name: params[:article][:name],
+											 brand: params[:article][:brand],
+											 price: params[:article][:price],
+											 quantity: params[:article][:quantity])
+			redirect_to @articles
+		end
 	end
+
+	#Destroy
+	def destroy
+        @articles = Article.find(params[:id])
+        @articles.destroy
+        redirect_to "/articles"
+    end
 end

@@ -1,0 +1,53 @@
+<% unless flash.empty? %>
+   <script type="text/javascript">
+      <% flash.each do |f| %>
+    <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+     toastr['<%= type %>']('<%= f[1] %>');
+   <% end %>
+   </script>
+<% end %>
+
+<style type="text/css">
+
+  html,body{
+    font-family: 'Roboto', sans-serif;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+      display: inline;
+      padding: 12px 50px;
+    }
+</style>
+<header>
+  <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <%= link_to "Inicio", articles_path, class:"nav-link"%>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Subir Productos", articles_path, class:"nav-link"%>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Pedir Productos", articles_path, class:"nav-link"%>
+      </li>
+      <% if user_signed_in? %>
+        <li>
+          <%= link_to('Cerrar Session',  destroy_user_session_path, :method => 'delete', class:"nav-link")%>
+        </li>
+      <%else%>
+        <li>
+          <%= link_to('Iniciar Sesion',  new_user_session_path, class:"nav-link")%>
+        </li>
+        <li>
+          <%= link_to('Crear Cuenta',  new_user_registration_path, class:"nav-link")%>
+        </li>
+      <%end%>
+  </ul>
+  <br>
+</header>
